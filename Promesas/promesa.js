@@ -153,7 +153,6 @@ Finalmente, devuelve una promesa que se resuelva después de N segundos con el m
   
 
 /*
-
 Ejercicio 5: Promesa con Cancelación
 Crea una función que realice las siguientes tareas:
 
@@ -161,40 +160,40 @@ Inicia una promesa que se resuelva después de 5 segundos con un mensaje.
 Si se llama a una función cancel antes de que se cumplan los 5 segundos, 
 la promesa debe rechazarse con el mensaje "Promesa cancelada".
 
-*/  
+*/
 
 function promesaConCancelacion() {
-    let promesaCancelada = false;
-  
-    const promesa = new Promise((resolve, reject) => {
-      const timerId = setTimeout(() => {
-        if (!promesaCancelada) {
-          resolve("La promesa se resolvió");
-        } else {
-          reject("Promesa cancelada");
-        }
-      }, 5000);
-  
-      
-      promesa.cancel = () => {
-        clearTimeout(timerId);
-        promesaCancelada = true;
-      };
-    });
-  
-    return promesa;
-  }
-  
-  const miPromesa = promesaConCancelacion();
-  
-  miPromesa
-    .then((resultado) => {
-      console.log(resultado);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-  
-  
-  miPromesa.cancel();
+  let promesaCancelada = false;
+  let  time;
+  const promesa = new Promise((resolve, reject) => {
+    time = setTimeout(() => {
+      if (!promesaCancelada) {
+        resolve("La promesa se resolvió");
+      }
+    }, 5000);
+
+
+    
+  });
+
+  promesa.cancel = () => {
+
+    promesaCancelada = true;
+    clearTimeout(time);
+
+    Promise.reject("Promesa cancelada en el tiempo " + time);
+  };
+  return promesa;
+}
+
+const promesas = promesaConCancelacion();
+
+promesas.then((resultado) => {
+  console.log(resultado);
+}).catch((error) => {
+  console.error("Error-> "+error);
+});
+
+
+promesas.cancel();
   

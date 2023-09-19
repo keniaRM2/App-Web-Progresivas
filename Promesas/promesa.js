@@ -54,7 +54,7 @@ Devuelve una promesa que se resuelva con un array de los resultados de todas las
 //     return Promise.all(promesas);
 //   }
   
-//   const urls = ["https://reqres.in/api/users", "https://reqres.in/api/users?page=2", "https://reqres.in/api/users?page=3"]; // Reemplaza con las URL reales
+//   const urls = ["https://reqres.in/api/users", "https://reqres.in/api/users?page=2"]; 
   
 //   promesadeMultiplesSolicitudes(urls)
 //     .then((results) => {
